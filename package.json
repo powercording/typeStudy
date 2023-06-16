@@ -1,0 +1,11 @@
+{
+  "name": "typestudy",
+  "version": "1.0.0",
+  "description": "typescript study document",
+  "main": "index.ts",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "powercording",
+  "license": "ISC"
+}
