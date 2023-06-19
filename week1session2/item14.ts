@@ -147,3 +147,9 @@ type ReturnType_14 = ReturnType<typeof returnType>; // number
 
 // 함수의 매개변수를 제한하기 위해서 우리는 지금 타입 스크립트를 사용 하고 있다.
 // 제네릭에서도extends 를 사용하여 타입의 범위제한을 둘 수 있다.
+
+const arr = [1, 2, 3, 4];
+
+for (let i of arr) {
+  console.log(i);
+}

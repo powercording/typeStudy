@@ -31,9 +31,14 @@ const buttonHandler: React.MouseEventHandler = (e) => {};
 // 시그니쳐가 일치한다면 여러 다른 함수 표현식에 적용해 볼만 하다.
 
 // 아래 함수의 스토리는 다음과 같다.
+// async function fetchTestFunction () {
+//   const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+//   return await response.json();
+// }
 // 어떤 fetch 함수가 호출 되었을때, 404 에러 발생하면 해당 응답이 JSON 형식이 아닐 수 있고
 //  .json() 함수를 호출 할 수 없다는 에러가 404 에러를 덮어 쓴다.
 // 따라서 에러가 아니면 일반 fetch 와 같은 Promise<response> 를 반환하고 에러라면 404 에러를 던지도록 하는 함수를 작성하려한다.
+
 
 // before
 async function someFetch(input: RequestInfo, init?: RequestInit) {
