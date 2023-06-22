@@ -5,6 +5,7 @@
 
 const myElement = document.getElementById("intro"); //타입이 HTMLElement | null 입니다.
 
+// 이때 개발자가 엘리먼트에 접근하려면 먼저 null 이 아닌지 체크해야 합니다.
 if (myElement) {
   myElement.innerText = "Hello!"; // 타입이 HTMLElement 입니다.
 } else {
