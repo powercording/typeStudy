@@ -35,18 +35,21 @@ const myFourthObj: MyObj = {
 
 // 객체 전개연산자를 사용하여 속성을 정의하면 타입을 지정하지 않아도 추론할 수 있습니다.
 interface MySpread {
-  name: string;
+  name?: string;
   age: number;
 }
+
 const mySpreadObj = {
   name: "상돈",
 };
+
 const mySpreadObj2 = { ...mySpreadObj, age: 30 }; // mySpreadObj2 의 타입은 { name: string; age: number; } 입니다.
 
-const myFinalObj: MySpread = { ...mySpreadObj, ...mySpreadObj2 };
+const myFinalObj: MySpread = { ...mySpreadObj2 };
 
 // 만약 타입 명시 없이 조건부 속성으로 추론하게끔 추가 하고 싶다면 아래와 같이 할 수 있습니다.
 declare let isOptional: boolean;
+
 const myFinalObj2 = {
   ...mySpreadObj2,
   ...(isOptional ? { gender: "male" } : {}),
@@ -56,5 +59,3 @@ const mySpreadObj3 = {
   ...myFinalObj2,
   ...(isOptional ? { gender: "male", location: "seoul" } : {}),
 }; // 위와같이 여러 속성을 추가할수도 있습니다.  //참조: 책과 타입 예시가 다른것같습니다. Page: 130
-
-
