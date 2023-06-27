@@ -20,7 +20,7 @@ interface MyObj {
 const myNewObj: MyObj = {}; // ~ 'name' 속성이 '{}' 형식에 없지만 'MyObj' 형식에서 필수입니다.
 
 // 위와 같은 문제들은 객체를 한번에 생성하면 해결 할 수 있습니다.
-const mySecondObj = {
+const mySecondObj : MyObj= {
   name: "상돈",
 };
 
@@ -59,3 +59,4 @@ const mySpreadObj3 = {
   ...myFinalObj2,
   ...(isOptional ? { gender: "male", location: "seoul" } : {}),
 }; // 위와같이 여러 속성을 추가할수도 있습니다.  //참조: 책과 타입 예시가 다른것같습니다. Page: 130
+

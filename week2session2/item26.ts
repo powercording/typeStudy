@@ -38,3 +38,79 @@ stringLiteralUnion(literalLang); // let 선언으로 생성된 변수이지만 �
 // 두번쨰는 const 로 만드는 것입니다. const 는 재할당이 불가능하므로 리터럴 그대로 추론합니다.
 const lang = "english";
 stringLiteralUnion(lang);
+
+// 튜플을 사용할때에도 문제가 발생할 수 있습니다.
+function panTo(where: [number, number]) {
+  //...
+}
+
+panTo([10, 20]); // OK
+
+const panVar = [10, 20];
+panTo(panVar); // 해당 number[] 변수의 길이를 특정할 수 없습니다.
+
+// 타입을 명시하여 해결할 수 있습니다.
+
+const panpan: [number, number] = [10, 20];
+panTo(panpan);
+
+// 이미 const 를 사용하여 변수를 선언 했지만 에러가 발생하고 있으므로 다른 방법이 필요합니다.
+// 개발자는 해당 변수가 변하지 않을것이라는 단언을 할 수 있습니다.
+const panpan2 = [10, 20] as const;
+// readonly 가 되어 할당할 수 있을것 같지만 readonly [number, number] 는 일반적인 [number ,number]보다 좁은 범위 이므로
+// 할당할 수 없습니다.
+panTo(panpan2);
+
+// as const 와 함께 해당 함수의 파라미터를 readonly 라고 수정 할 수 있습니다.
+function fanTo(where: readonly [number, number]) {
+  //...
+}
+fanTo(panpan2);
+
+// 객체에서 발생하는 문맥적 오류에 대해서 알아보겠습니다.
+type StringLang = "JavaScript" | "TypeScript";
+
+interface Go {
+  language: StringLang;
+  organizaion: string;
+}
+
+function complain(government: Go) {
+  //...
+}
+
+complain({ language: "JavaScript", organizaion: "W3C" }); // OK
+
+const langObj = {
+  language: "JavaScript",
+  organizaion: "W3C",
+};
+
+const langObj2 = {
+  language: "JavaScript",
+  organizaion: "W3C",
+} as const;
+
+complain(langObj); // language 타입이 일치하지 않습니다.
+complain(langObj2); // as const 를 사용해서 해결 할 수 있습니다
+
+// 콜백 사용시의 주의점
+function needSomeCallback(callback: (x: number) => void) {
+  //...
+}
+
+needSomeCallback((x) => {}); // 함수 선언에서 명시된 대로 x 를 넘버로 추론 합니다.
+
+// 이때 콜백을 상수화 시킨다면 어떻게 될까요.
+function thisIsCallback(a) {} // 타입을 any 로 추론합니다.
+
+needSomeCallback(thisIsCallback); // any 타입을 가지기 때문에 타입체크를 무시합니다.
+
+// 이때는 콜백함수의 인자에 타입을 명시함으로써 해결할 수 있습니다.
+function thisIsCallback2(a: number) {}
+needSomeCallback(thisIsCallback2); // OK
+
+// 요약 
+// 타입 추론에서 문매깅 어떻게 쓰이는지 주의해서 살펴봐야 합니다.
+//  변수를 별도로 뽑아서 선언 했을때 오류가 발생한다면 타입선언을 추가해야합니다.
+// 변수가 정말로 상수라면 as const 를 고려해 볼만 합니다. 그러나 이렇게 사용하면 선언한 곳이 아닌 사용하는곳에서오류가 발생합니다. 
