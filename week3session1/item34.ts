@@ -30,6 +30,7 @@ const test01: Expression01[] = [
 // 정밀도를 끌어 올리기 위해서 문자열 리터럴을 적용해보겠습니다.
 type FnName = "+" | "-" | "*" | "/" | "*" | "rgb" | "<" | ">" | "case";
 type CallExpression = [FnName, ...any[]];
+
 type Expression02 = number | string | CallExpression;
 
 const test02: Expression02[] = [
