@@ -27,6 +27,7 @@ interface PointLayout {
 }
 
 type NewLayer = FillLayer | LineLayout | PointLayout;
+
 // 이러한 형태라면 동시에 존재할수없는 속성끼리 섞이는것을 방지할 수 있습니다. (유효한 상태만 표현 > item 28)
 // 또다른 방식으로는 태그된 유니온 이 있습니다.
 // 인터페이스가 같은이름의 속성을가지고 해당 속성의 타입(값)으로 구분합니다.

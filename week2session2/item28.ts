@@ -4,14 +4,27 @@
 // 효과적인 타입을 설계하기 위해서는 유효한 상태만 표현할 수 있는 타입을 만들어 내는것이 가장 중요합니다.
 
 // 애플리케이션에서 페이지를 선택하면 내용을 로드하고, 화면에 표시하는 상태를 다음처럼 설계한다 하겠습니다.
-interface State {
+interface State1 {
   pageText: string;
   isLoading: boolean;
   error?: string;
 }
 
+const state1: State1 = {
+  pageText: "hello",
+  isLoading: true,
+  error: "error",
+};
+
+function fetc(state) {
+  state.isLoading = true; // error = null
+  // status === 200  ? => state.isLoading = false, state.pageText = text
+  // status === 404 ? => state.isLoading = false, state.error = error
+  // finally => state.isLoading = false
+}
+
 // 해당 인터페이스를 참조하여 랜더링하는 함수는 상태 객체의 필드를 전부 고려하여야 합니다.
-function someRenderFunction(state: State) {
+function someRenderFunction(state: State1) {
   if (state.isLoading) {
     return "loading...";
   }
@@ -26,7 +39,7 @@ function someRenderFunction(state: State) {
 // 필요한 정보가 부족하기 때문입니다.
 
 // 한편 페이지를 전환하는 함수는 아래와 같다고 하겠습니다.
-async function someChangePage(state: State, newPage: string) {
+async function someChangePage(state: State1, newPage: string) {
   state.isLoading = true;
 
   try {
@@ -122,9 +135,9 @@ function getStickState(controls: CockpitControls) {
 }
 
 // 위 함수는 문제가 있습니다. 오른쪽 스틱과 왼쪽 스틱중 중립 ( 0 ) 이 아닌 스틱의 값을 사용하여야 합니다.
-// 왼쪽스틱이 0일때는 제대로 오른쪽 스틱의 값을 가져 오지만 오른쪽 스틱상태에 대한 조건이 존재하지 않습니다. 
+// 왼쪽스틱이 0일때는 제대로 오른쪽 스틱의 값을 가져 오지만 오른쪽 스틱상태에 대한 조건이 존재하지 않습니다.
 
-// 이러한 상태 설계 오류로 인한 사고에 대해서 예시가 나옵니다. 
-// 그러므로 개발자는 상태를 설계할 때 어떤 값들을 포함하고, 제외할지 신중하게 생각해야 합니다. 
+// 이러한 상태 설계 오류로 인한 사고에 대해서 예시가 나옵니다.
+// 그러므로 개발자는 상태를 설계할 때 어떤 값들을 포함하고, 제외할지 신중하게 생각해야 합니다.
 
-// 유효한 상태와 무효한 상태( 존재해서는 안되는 상태 ) 를 둘 다 표현하는 타입은 혼란스럽습니다. 
+// 유효한 상태와 무효한 상태( 존재해서는 안되는 상태 ) 를 둘 다 표현하는 타입은 혼란스럽습니다.

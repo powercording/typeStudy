@@ -1,4 +1,4 @@
-//Item 31
+// Item 31
 // Page : 169 타입 주변에 null 값 배치하기
 
 // strictNullChecks 옵션을 이 없는 경우의 문제를 살펴 보겠습니다.
@@ -43,6 +43,7 @@ function nullExtent(nums: number[]) {
 const [minz, maxz] = nullExtent([1, 2, 3])!;
 const spn = maxz - minz;
 // null 아님 단언(!)을 사용하면 정상적으로 number[] 를 얻을수있습니다.
+
 // if 를 사용할수도 있습니다.
 const minMax = nullExtent([0, 1]);
 if (minMax) {
@@ -51,5 +52,5 @@ if (minMax) {
 }
 
 // 한 값으 null 여부가 다른값의 null 여부에 암시적으로 관련되도록 설계하면 안됩니다.
-// api 작성시에는 타입 전체가 null 이거나 null 이 아니게 해야 합니다.
+// api 작성시에는 타입 전체가 null 이거나 null 이 아니게 해야 합니다. c
 // 스트릭 널쳌은 타입 시스템을 더욱 강력하게 만들어 줍니다.
