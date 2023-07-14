@@ -1,5 +1,5 @@
 // @ts-check
-// / <reference path="./types.d.ts" />
+/// /<reference path="./types.d.ts" />
 
 // Item 59
 // Page :  300 ts 도입 전에 @ts-check 와 JSDock 으로 시험해보기
